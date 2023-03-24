@@ -111,7 +111,7 @@ do { \
     WRITE_FRD(value); \
   } \
 } while (0)
- 
+
 #define SHAMT (insn.i_imm() & 0x3F)
 #define BRANCH_TARGET (pc + insn.sb_imm())
 #define JUMP_TARGET (pc + insn.uj_imm())
@@ -310,3 +310,6 @@ inline long double to_f(float128_t f) { long double r; memcpy(&r, &f, sizeof(r))
   reg_t h##field = get_field(STATE.henvcfg->read(), HENVCFG_##field)
 
 #endif
+
+// Model a hart whose CPI is variable
+#define CONSUME_CYCLES(cycles) STATE.mcycle->bump((cycles))

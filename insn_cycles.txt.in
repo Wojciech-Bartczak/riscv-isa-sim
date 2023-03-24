@@ -1,0 +1,11 @@
+div 8
+divu 8
+divuw 8
+divw 8
+mul 5
+mulh 5
+mulhsu 5
+mulhu 5
+mulr64 6
+mulsr64 6
+mulw 6

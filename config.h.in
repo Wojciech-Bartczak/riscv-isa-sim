@@ -102,6 +102,9 @@
 /* Define if subproject MCPPBS_SPROJ_NORM is enabled */
 #undef RISCV_ENABLED
 
+/* Enable support for modeling CPI other than 1 */
+#undef RISCV_ENABLE_CPI_MODELING
+
 /* Enable support for running target in either endianness */
 #undef RISCV_ENABLE_DUAL_ENDIAN
 

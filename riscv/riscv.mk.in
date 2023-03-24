@@ -77,7 +77,7 @@ riscv_test_srcs =
 
 riscv_gen_hdrs = \
 	insn_list.h \
-
+	$(riscv_gen_cycles_hdrs) \
 
 riscv_insn_ext_i = \
 	add \
@@ -1384,7 +1384,12 @@ riscv_insn_list = \
 
 riscv_gen_srcs = $(addsuffix .cc,$(riscv_insn_list))
 
-insn_list.h: $(src_dir)/riscv/riscv.mk.in
+riscv_gen_cycles_hdrs = $(addsuffix _cycles.h,$(riscv_insn_list))
+
+$(riscv_gen_cycles_hdrs):
+	$(scripts_dir)/gen_instr_cycle.sh insn_cycles.txt $@ $(subst _cycles.h,,$@) $(ENABLE_CPI_MODELING)
+
+insn_list.h: $(src_dir)/riscv/riscv.mk.in $(riscv_gen_cycles_hdrs)
 	for insn in $(foreach insn,$(riscv_insn_list),$(subst .,_,$(insn))) ; do \
 		printf 'DEFINE_INSN(%s)\n' "$${insn}" ; \
 	done > $@.tmp
